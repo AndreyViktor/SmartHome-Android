@@ -1,4 +1,4 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.network;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;

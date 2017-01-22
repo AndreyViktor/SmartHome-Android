@@ -1,10 +1,12 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.ChangeViewsMainList;
 
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import br.com.andrey.projetointegradoapp.R;
 
 /**
  * Created by andrey on 04/08/2016.

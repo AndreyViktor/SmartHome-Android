@@ -1,4 +1,4 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.Modules;
 
 /**
  * Created by andrey on 04/08/2016.

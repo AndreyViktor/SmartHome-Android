@@ -1,19 +1,22 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.DragEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import java.util.List;
+
+import br.com.andrey.projetointegradoapp.Modules.Modulo;
+import br.com.andrey.projetointegradoapp.Modules.ModuloAdapter;
+import br.com.andrey.projetointegradoapp.DAO.ModuloDAO;
+import br.com.andrey.projetointegradoapp.R;
 
 public class ListaModuloActivity extends AppCompatActivity {
 
