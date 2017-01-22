@@ -1,6 +1,5 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,8 +8,10 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.SeekBar;
-import android.widget.TextView;
+
+import br.com.andrey.projetointegradoapp.Modules.Modulo;
+import br.com.andrey.projetointegradoapp.DAO.ModuloDAO;
+import br.com.andrey.projetointegradoapp.R;
 
 import br.com.andrey.projetointegradoapp.ColorPicker.HueSatView;
 import br.com.andrey.projetointegradoapp.Modulo;

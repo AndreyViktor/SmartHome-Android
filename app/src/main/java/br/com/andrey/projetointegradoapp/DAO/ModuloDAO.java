@@ -1,4 +1,4 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.andrey.projetointegradoapp.Modules.Modulo;
+import br.com.andrey.projetointegradoapp.Modules.ModuloDimmer;
+import br.com.andrey.projetointegradoapp.Modules.ModuloLedRGB;
+import br.com.andrey.projetointegradoapp.Modules.ModuloSwitch;
 
 /**
  * Created by andrey on 04/08/2016.
