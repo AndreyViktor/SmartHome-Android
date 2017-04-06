@@ -25,12 +25,16 @@ public class ListaModuloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_modulo);
 
+
+
         listaModulo = (ListView) findViewById(R.id.Lista_Modulos);
 
         listaModulo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 modulo =  (Modulo) listaModulo.getItemAtPosition(position);
+                Intent config = new Intent(ListaModuloActivity.this, RgbConfigActivity.class);
+                startActivity(config);
             }
         });
 
@@ -43,6 +47,7 @@ public class ListaModuloActivity extends AppCompatActivity {
             }
         });
         registerForContextMenu(listaModulo);
+
     }
 
     private void carregaLista() {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/activity_rgb_config"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.andrey.projetointegradoapp.activities.RgbConfigActivity">
+
+    <br.com.andrey.projetointegradoapp.ColorPicker.AlphaView
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:id="@+id/alpha_view"/>
+
+    <br.com.andrey.projetointegradoapp.ColorPicker.SwatchView
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:id="@+id/swatch_view"/>
+
+    <br.com.andrey.projetointegradoapp.ColorPicker.HueSatView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hue_sat"/>
+
+</LinearLayout>

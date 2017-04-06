@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.andrey.projetointegradoapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,10 +13,16 @@
         <activity android:name=".ListaModuloActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< Updated upstream
         <activity android:name=".FormularioAddModuloActivity"></activity>
+=======
+        <activity android:name=".activities.FormularioAddModuloActivity" />
+        <activity android:name=".activities.RgbConfigActivity"></activity>
+>>>>>>> Stashed changes
     </application>
 
 </manifest>

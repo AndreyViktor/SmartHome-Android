@@ -12,14 +12,22 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import br.com.andrey.projetointegradoapp.ColorPicker.HueSatView;
+import br.com.andrey.projetointegradoapp.Modulo;
+import br.com.andrey.projetointegradoapp.ModuloDAO;
+import br.com.andrey.projetointegradoapp.R;
+
 public class FormularioAddModuloActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_add_modulo);
-    }
 
+
+        HueSatView hue = (HueSatView) findViewById(R.id.hue_hue_br);
+        
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
