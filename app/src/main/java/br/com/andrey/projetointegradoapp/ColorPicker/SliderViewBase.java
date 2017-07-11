@@ -9,8 +9,12 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public abstract class SliderViewBase extends View {
+
+
+
 
     private final Paint borderPaint;
     private final Paint checkerPaint;

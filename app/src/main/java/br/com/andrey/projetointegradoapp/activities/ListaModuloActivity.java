@@ -3,6 +3,7 @@ package br.com.andrey.projetointegradoapp.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,11 +12,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.List;
 
+import br.com.andrey.projetointegradoapp.ColorPicker.ObservableColor;
 import br.com.andrey.projetointegradoapp.Modules.Modulo;
 import br.com.andrey.projetointegradoapp.Modules.ModuloAdapter;
 import br.com.andrey.projetointegradoapp.DAO.ModuloDAO;
+import br.com.andrey.projetointegradoapp.Modules.ModuloLedRGB;
 import br.com.andrey.projetointegradoapp.R;
 
 public class ListaModuloActivity extends AppCompatActivity {
@@ -28,15 +32,14 @@ public class ListaModuloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_modulo);
 
-
-
         listaModulo = (ListView) findViewById(R.id.Lista_Modulos);
-
         listaModulo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                modulo =  (Modulo) listaModulo.getItemAtPosition(position);
+                ModuloLedRGB rgb =  (ModuloLedRGB) listaModulo.getItemAtPosition(position);
+                Log.d("id:",rgb.getId()+"");
                 Intent config = new Intent(ListaModuloActivity.this, RgbConfigActivity.class);
+                config.putExtra("rgb",rgb);
                 startActivity(config);
             }
         });

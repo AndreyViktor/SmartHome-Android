@@ -1,45 +1,47 @@
 package br.com.andrey.projetointegradoapp.Modules;
 
+import android.graphics.Color;
+
+import java.io.Serializable;
+
 /**
  * Created by andrey on 16/12/2016.
  */
 
 public class ModuloLedRGB extends Modulo {
-    private double progress;
-    private double progressRed;
-    private double progressGreen;
-    private double progressBlue;
+    private int color;
 
-    public double getProgressRed() {
-        return progressRed;
+    private float getValue(){
+        float hsv[]={0,0,0};
+        Color.colorToHSV(color,hsv);
+        return hsv[2];
     }
 
-    public void setProgressRed(double progressRed) {
-        this.progressRed = progressRed;
+    public int getColor() {
+        return color;
     }
 
-
-    public double getProgress() {
-        return progress;
+    public void setColor(int color) {
+        this.color = color;
     }
 
-    public void setProgress(double progress) {
-        this.progress = progress;
+    public int getLedWhite() {
+        return (int)((255-(Color.alpha(color)))*getValue());
     }
 
-    public double getProgressGreen() {
-        return progressGreen;
+    public int getLedRed() {
+        return (Color.red(color));
     }
 
-    public void setProgressGreen(double progressGreen) {
-        this.progressGreen = progressGreen;
+    public int getLedGreen() {
+        return (Color.green(color));
     }
 
-    public double getProgressBlue() {
-        return progressBlue;
+    public int getLedBlue() {
+        return (Color.blue(color));
     }
 
-    public void setProgressBlue(double progressBlue) {
-        this.progressBlue = progressBlue;
+    public double getAlpha() {
+        return Color.alpha(color);
     }
 }

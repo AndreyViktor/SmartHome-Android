@@ -49,13 +49,5 @@
         android:layout_height="wrap_content"
         android:textSize="25dp"
         android:id="@+id/formulario_IP"/>
-    <br.com.andrey.projetointegradoapp.ColorPicker.HueSatView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/hue_hue_br"/>
-    <br.com.andrey.projetointegradoapp.ColorPicker.ValueView
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:id="@+id/value_view"/>
 
 </LinearLayout>

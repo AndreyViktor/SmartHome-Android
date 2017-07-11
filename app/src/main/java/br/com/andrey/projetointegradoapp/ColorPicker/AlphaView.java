@@ -3,8 +3,18 @@ package br.com.andrey.projetointegradoapp.ColorPicker;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 public class AlphaView extends SliderViewBase implements ColorObserver {
+    //////////////Listener
+    public interface OnAlphaChangeListener{
+        void onAlphaChanged(ObservableColor observableColor);
+    }
+    AlphaView.OnAlphaChangeListener mOnAlphaChangeListener;
+    public void setOnAlphaChangeListener(AlphaView.OnAlphaChangeListener l){
+        mOnAlphaChangeListener = l;
+    }
+/////////////////////////
 
     private ObservableColor observableColor = new ObservableColor(0);
 
@@ -53,6 +63,14 @@ public class AlphaView extends SliderViewBase implements ColorObserver {
         final int bmpWidth = isWide ? w : 1;
         final int bmpHeight = isWide ? 1 : h;
         return Bitmap.createBitmap(colors, bmpWidth, bmpHeight, Bitmap.Config.ARGB_8888);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(mOnAlphaChangeListener!=null){
+            mOnAlphaChangeListener.onAlphaChanged(observableColor);
+        }
+        return super.onTouchEvent(event);
     }
 
 }

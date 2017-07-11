@@ -16,6 +16,7 @@ import br.com.andrey.projetointegradoapp.network.UDP;
 public class EditDimmerListItem {
     public View getView(View view, final Modulo modulo, final Context context) {
         ViewHolder holder = (ViewHolder) view.getTag();
+
         final ModuloDimmer dimmer = (ModuloDimmer) modulo;
 
         holder.campoBarra.setTag(dimmer.getId());

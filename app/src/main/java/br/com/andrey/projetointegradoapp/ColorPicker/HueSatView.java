@@ -15,6 +15,14 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
 public class HueSatView extends SquareView implements ColorObserver {
+    public interface OnColorChangeListener{
+        void onNewColorPicked(ObservableColor observableColor);
+    }
+    OnColorChangeListener mOnColorChangeListener;
+    public void setOnColorChangeListener(OnColorChangeListener l){
+        mOnColorChangeListener = l;
+    }
+
 
     private final Paint borderPaint;
     private final Paint pointerPaint;
@@ -101,6 +109,9 @@ public class HueSatView extends SquareView implements ColorObserver {
                 clamp(pointer, event.getX(), event.getY(), false);
                 update();
                 getParent().requestDisallowInterceptTouchEvent(true);
+
+                if(mOnColorChangeListener!=null)mOnColorChangeListener.onNewColorPicked(observableColor);
+
                 return true;
         }
         return super.onTouchEvent(event);

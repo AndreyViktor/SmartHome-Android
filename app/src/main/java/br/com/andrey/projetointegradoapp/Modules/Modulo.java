@@ -1,9 +1,11 @@
 package br.com.andrey.projetointegradoapp.Modules;
 
+import java.io.Serializable;
+
 /**
  * Created by andrey on 04/08/2016.
  */
-public class Modulo {
+public class Modulo implements Serializable {
     private long id;
     private String nome;
     private String ModuleIpAdress;

@@ -4,9 +4,18 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 public class ValueView extends SliderViewBase implements ColorObserver {
-
+    ////////////////////////////////////
+    public interface OnValueChangeListener{
+        void onValueChanged(ObservableColor observableColor);
+    }
+    OnValueChangeListener mOnValueChangeListener;
+    public void setOnValueChangeListener(OnValueChangeListener l){
+        mOnValueChangeListener = l;
+    }
+    ///////////////////////
     private ObservableColor observableColor = new ObservableColor(0);
 
     public ValueView(Context context) {
@@ -24,6 +33,7 @@ public class ValueView extends SliderViewBase implements ColorObserver {
 
     @Override
     public void updateColor(ObservableColor observableColor) {
+        this.observableColor = observableColor;
         setPos(this.observableColor.getValue());
         updateBitmap();
         invalidate();
@@ -32,6 +42,7 @@ public class ValueView extends SliderViewBase implements ColorObserver {
     @Override
     protected void notifyListener(float currentPos) {
         observableColor.updateValue(currentPos, this);
+
     }
 
     @Override
@@ -57,5 +68,15 @@ public class ValueView extends SliderViewBase implements ColorObserver {
         final int bmpHeight = isWide ? 1 : h;
         return Bitmap.createBitmap(colors, bmpWidth, bmpHeight, Bitmap.Config.ARGB_8888);
     }
+    public ObservableColor getObservableColor(){
+        return this.observableColor;
+    }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(mOnValueChangeListener!=null){
+            mOnValueChangeListener.onValueChanged(observableColor);
+        }
+        return super.onTouchEvent(event);
+    }
 }
