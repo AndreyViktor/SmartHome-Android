@@ -1,9 +1,14 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.ChangeViewsMainList;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
+
+import br.com.andrey.projetointegradoapp.Modules.Modulo;
+import br.com.andrey.projetointegradoapp.DAO.ModuloDAO;
+import br.com.andrey.projetointegradoapp.Modules.ModuloDimmer;
+import br.com.andrey.projetointegradoapp.network.UDP;
 
 /**
  * Created by andrey on 22/12/2016.
@@ -11,6 +16,7 @@ import android.widget.Toast;
 public class EditDimmerListItem {
     public View getView(View view, final Modulo modulo, final Context context) {
         ViewHolder holder = (ViewHolder) view.getTag();
+
         final ModuloDimmer dimmer = (ModuloDimmer) modulo;
 
         holder.campoBarra.setTag(dimmer.getId());

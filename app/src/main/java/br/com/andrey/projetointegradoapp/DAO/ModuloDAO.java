@@ -1,4 +1,4 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.andrey.projetointegradoapp.Modules.Modulo;
+import br.com.andrey.projetointegradoapp.Modules.ModuloDimmer;
+import br.com.andrey.projetointegradoapp.Modules.ModuloLedRGB;
+import br.com.andrey.projetointegradoapp.Modules.ModuloSwitch;
 
 /**
  * Created by andrey on 04/08/2016.
@@ -24,9 +29,7 @@ public class ModuloDAO extends SQLiteOpenHelper {
                                                     "ipAdress text," +
                                                     "modulo text," +
                                                     "progress double," +
-                                                    "progressRed double," +
-                                                    "progressGreen double," +
-                                                    "progressBlue double," +
+                                                    "color int" +
                                                     "switch bit)";
                 db.execSQL(sql);
             }
@@ -37,6 +40,7 @@ public class ModuloDAO extends SQLiteOpenHelper {
                     case 1:
                 }
             }
+
 
             public List<Modulo> buscaModulos() {
                 SQLiteDatabase db = getReadableDatabase();
@@ -51,10 +55,7 @@ public class ModuloDAO extends SQLiteOpenHelper {
                             rgb.setModuleIpAdress(c.getString(c.getColumnIndex("ipAdress")));
                             rgb.setModulo(c.getString(c.getColumnIndex("modulo")));
 
-                            rgb.setProgress(c.getDouble(c.getColumnIndex("progress")));
-                            rgb.setProgressRed(c.getDouble(c.getColumnIndex("progressRed")));
-                            rgb.setProgressGreen(c.getDouble(c.getColumnIndex("progressGreen")));
-                            rgb.setProgressBlue(c.getDouble(c.getColumnIndex("progressBlue")));
+                            rgb.setColor(c.getInt(c.getColumnIndex("color")));
 
                             modulos.add(rgb);
                             break;
@@ -122,13 +123,21 @@ public class ModuloDAO extends SQLiteOpenHelper {
     public void updateRgb(ModuloLedRGB rgb){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = getBasicModuloValues(rgb);
-        values.put("progress",rgb.getProgress());
-        values.put("progressRed",rgb.getProgressRed());
-        values.put("progressGreen",rgb.getProgressGreen());
-        values.put("progressBlue",rgb.getProgressBlue());
+        values.put("color",rgb.getColor());
         String[] args = {String.valueOf(rgb.getId())};
         db.update("modulos", values,"id=?",args);
         values.clear();
+    }
+    public int updateRgbStatus(ModuloLedRGB rgb){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("id",rgb.getId());
+        values.put("color",rgb.getColor());
+
+        int i = db.update("modulos",values,"id=?", new String[]{String.valueOf(rgb.getId())});
+        values.clear();
+        return i;
     }
     public void updateDimmer(ModuloDimmer dimmer){
         SQLiteDatabase db = getWritableDatabase();
@@ -145,5 +154,15 @@ public class ModuloDAO extends SQLiteOpenHelper {
         String[] args = {String.valueOf(sw.getId())};
         db.update("modulos", values,"id=?",args);
         values.clear();
+    }
+    public ModuloLedRGB getModuloById(long id){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("select * from modulos where id=?",new String[]{String.valueOf(id)});
+        ModuloLedRGB rgb = new ModuloLedRGB();
+        while(c.moveToNext()) {
+            rgb.setId(c.getLong(c.getColumnIndex("id")));
+            rgb.setColor(c.getInt(c.getColumnIndex("color")));
+        }
+        return rgb;
     }
 }

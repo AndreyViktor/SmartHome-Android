@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/activity_rgb_config"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.andrey.projetointegradoapp.activities.RgbConfigActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Controle luz branca"/>
+
+    <br.com.andrey.projetointegradoapp.ColorPicker.AlphaView
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/alpha_view"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="choose a color"/>
+
+    <br.com.andrey.projetointegradoapp.ColorPicker.HueSatView
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:id="@+id/hue_sat"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Controle intensidade luz"/>
+
+    <br.com.andrey.projetointegradoapp.ColorPicker.ValueView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/value_view"/>
+</LinearLayout>

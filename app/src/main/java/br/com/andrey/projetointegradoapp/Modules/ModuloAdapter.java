@@ -1,14 +1,21 @@
-package br.com.andrey.projetointegradoapp;
+package br.com.andrey.projetointegradoapp.Modules;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
 import java.util.List;
+
+import br.com.andrey.projetointegradoapp.ChangeViewsMainList.EditDimmerListItem;
+import br.com.andrey.projetointegradoapp.ColorPicker.ObservableColor;
+import br.com.andrey.projetointegradoapp.ColorPicker.ValueView;
+import br.com.andrey.projetointegradoapp.DAO.ModuloDAO;
+import br.com.andrey.projetointegradoapp.R;
+import br.com.andrey.projetointegradoapp.ChangeViewsMainList.ViewHolder;
+import br.com.andrey.projetointegradoapp.network.UDP;
 
 /**
  * Created by andrey on 04/08/2016.
@@ -67,6 +74,7 @@ public class ModuloAdapter extends BaseAdapter {
         holder.campoNome.setTag(modulo.getId());
         holder.campoIp.setTag(modulo.getId());
 
+
         holder.campoNome.setText(modulo.getNome());
         holder.campoIp.setText("ip adress:"+modulo.getModuleIpAdress());
 
@@ -76,8 +84,7 @@ public class ModuloAdapter extends BaseAdapter {
 //                holder.campoSwitch.setChecked(sw.isOn());
                 break;
             case "RGB":
-                    EditRgbListItem rgb = new EditRgbListItem();
-                    view = rgb.getView(view, modulo, context);
+                    view = getViewRGB(view, modulo, context);
                 break;
             case "Dimmer":
                     EditDimmerListItem dimmer = new EditDimmerListItem();
@@ -87,6 +94,43 @@ public class ModuloAdapter extends BaseAdapter {
 
         }
 
+        return view;
+    }
+
+    private View getViewRGB(View view, Modulo modulo, final Context context) {
+
+        final ModuloLedRGB rgb = (ModuloLedRGB) modulo;
+        final ValueView vv = (ValueView) view.findViewById(R.id.value_rgb_list);
+        ObservableColor oc = new ObservableColor(rgb.getColor());
+        vv.updateColor(oc);
+        vv.observeColor(oc);
+
+        vv.setOnValueChangeListener(new ValueView.OnValueChangeListener() {
+            @Override
+            public void onValueChanged(ObservableColor oc) {
+                rgb.setColor(oc.getColor());
+                //Toast.makeText(RgbConfigActivity.this,"id:"+rgb.getId()+"color:"+rgb.getColor(),Toast.LENGTH_SHORT).show();
+
+
+                int white = rgb.getLedWhite();
+                int red = rgb.getLedRed();
+                int green = rgb.getLedGreen();
+                int blue = rgb.getLedBlue();
+
+                String message ="W"+white+"R"+red+"G"+green+"B"+blue ;
+                Thread t = new Thread(new UDP(message, rgb.getModuleIpAdress()));
+                t.start();
+
+                Log.d("branco:",white+"");
+                Log.d("red:",red+"");
+                Log.d("green:",green+"");
+                Log.d("blue:",blue+"");
+
+                ModuloDAO dao = new ModuloDAO(context);
+                dao.updateRgb(rgb);
+                dao.close();
+            }
+        });
         return view;
     }
 
