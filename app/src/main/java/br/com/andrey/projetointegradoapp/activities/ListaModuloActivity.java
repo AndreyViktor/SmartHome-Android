@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.DragEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -53,7 +55,6 @@ public class ListaModuloActivity extends AppCompatActivity {
             }
         });
         registerForContextMenu(listaModulo);
-
     }
 
     private void carregaLista() {

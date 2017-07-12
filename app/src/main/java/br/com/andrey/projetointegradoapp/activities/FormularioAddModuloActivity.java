@@ -55,7 +55,6 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_formulario,menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
@@ -63,9 +62,10 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menu_ok:
                 Modulo modulo = new Modulo();
-                RadioGroup group =(RadioGroup) findViewById(R.id.formulario_group);
+
                 EditText campoNome= (EditText) findViewById(R.id.formulario_nome);
                 EditText campoIP = (EditText) findViewById(R.id.formulario_IP);
+                RadioGroup group =(RadioGroup) findViewById(R.id.formulario_group);
                 RadioButton rb = (RadioButton) findViewById(group.getCheckedRadioButtonId());
 
                 modulo.setNome(campoNome.getText().toString());
