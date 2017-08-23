@@ -38,7 +38,6 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
 
     private TextView mTvApSsid;
     private EditText mEdtApPassword;
-    private Button mBtnConfirm;
     private Switch mSwitchIsSsidHidden;
     private EspWifiAdminSimple mWifiAdmin;
     private Spinner mSpinnerTaskCount;
@@ -51,37 +50,7 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
         mWifiAdmin = new EspWifiAdminSimple(this);
         mTvApSsid = (TextView) findViewById(R.id.tvApSssidConnected);
         mEdtApPassword = (EditText) findViewById(R.id.edtApPassword);
-        // usar botão de confirmação...
-        mBtnConfirm = (Button) findViewById(R.id.btnConfirm);
         mSwitchIsSsidHidden = (Switch) findViewById(R.id.switchIsSsidHidden);
-        mBtnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (v == mBtnConfirm) {
-                    String apSsid = mTvApSsid.getText().toString();
-                    String apPassword = mEdtApPassword.getText().toString();
-                    String apBssid = mWifiAdmin.getWifiConnectedBssid();
-                    Boolean isSsidHidden = mSwitchIsSsidHidden.isChecked();
-                    String isSsidHiddenStr = "NO";
-                    String taskResultCountStr = Integer.toString(mSpinnerTaskCount
-                            .getSelectedItemPosition());
-                    if (isSsidHidden)
-                    {
-                        isSsidHiddenStr = "YES";
-                    }
-                    if (__IEsptouchTask.DEBUG) {
-                        Log.d(TAG, "mBtnConfirm is clicked, mEdtApSsid = " + apSsid
-                                + ", " + " mEdtApPassword = " + apPassword);
-                    }
-                    new EsptouchAsyncTask3().execute(apSsid, apBssid, apPassword,
-                            isSsidHiddenStr, taskResultCountStr);
-                }
-            }
-
-        });
-        initSpinner();
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,9 +95,6 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
         } else {
             mTvApSsid.setText("");
         }
-        // check whether the wifi is connected
-        boolean isApSsidEmpty = TextUtils.isEmpty(apSsid);
-        mBtnConfirm.setEnabled(!isApSsidEmpty);
     }
 
     private void initSpinner()
