@@ -94,25 +94,27 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_ok:
-                Modulo modulo = new Modulo();
-
-                EditText campoNome= (EditText) findViewById(R.id.formulario_nome);
-                EditText campoIP = (EditText) findViewById(R.id.formulario_IP);
-                RadioGroup group =(RadioGroup) findViewById(R.id.formulario_group);
-                RadioButton rb = (RadioButton) findViewById(group.getCheckedRadioButtonId());
-
-                modulo.setNome(campoNome.getText().toString());
-                modulo.setModuleIpAdress(campoIP.getText().toString());
-                modulo.setModulo(rb.getText().toString());
-
-                ModuloDAO dao = new ModuloDAO(this);
-                dao.insere(modulo);
-                dao.close();
-
-                finish();
-        }
+                String apSsid = mTvApSsid.getText().toString();
+                String apPassword = mEdtApPassword.getText().toString();
+                String apBssid = mWifiAdmin.getWifiConnectedBssid();
+                Boolean isSsidHidden = mSwitchIsSsidHidden.isChecked();
+                String isSsidHiddenStr = "NO";
+                String taskResultCountStr = Integer.toString(mSpinnerTaskCount
+                        .getSelectedItemPosition());
+                if (isSsidHidden)
+                {
+                    isSsidHiddenStr = "YES";
+                }
+                if (__IEsptouchTask.DEBUG) {
+                    Log.d(TAG, "mBtnConfirm is clicked, mEdtApSsid = " + apSsid
+                            + ", " + " mEdtApPassword = " + apPassword);
+                }
+                new EsptouchAsyncTask3().execute(apSsid, apBssid, apPassword,
+                        isSsidHiddenStr, taskResultCountStr);
+            }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     protected void onResume() {
@@ -347,8 +349,27 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
                     mProgressDialog.setMessage(sb.toString());
                 } else {
                     mProgressDialog.setMessage("Esptouch fail");
+
+                    //termina config esp --- começa config sistema // rodando para falha -- ajustar firmware esp...
+                    Modulo modulo = new Modulo();
+
+                    EditText campoNome= (EditText) findViewById(R.id.formulario_nome);
+                    EditText campoIP = (EditText) findViewById(R.id.formulario_IP);
+                    RadioGroup group =(RadioGroup) findViewById(R.id.formulario_group);
+                    RadioButton rb = (RadioButton) findViewById(group.getCheckedRadioButtonId());
+
+                    modulo.setNome(campoNome.getText().toString());
+                    modulo.setModuleIpAdress("ipTeste");
+                    modulo.setModulo(rb.getText().toString());
+
+                    ModuloDAO dao = new ModuloDAO(FormularioAddModuloActivity.this);
+                    dao.insere(modulo);
+                    dao.close();
+
+                    finish();
+
                 }
-            }
+            }//codigo original
         }
     }
 }
