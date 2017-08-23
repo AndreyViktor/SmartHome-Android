@@ -2,10 +2,10 @@ package br.com.andrey.projetointegradoapp.EspTouch.protocol;
 
 import java.net.InetAddress;
 
-import com.espressif.iot.esptouch.task.ICodeData;
-import com.espressif.iot.esptouch.util.ByteUtil;
-import com.espressif.iot.esptouch.util.CRC8;
-import com.espressif.iot.esptouch.util.EspNetUtil;
+import br.com.andrey.projetointegradoapp.EspTouch.task.ICodeData;
+import br.com.andrey.projetointegradoapp.EspTouch.util.ByteUtil;
+import br.com.andrey.projetointegradoapp.EspTouch.util.CRC8;
+import br.com.andrey.projetointegradoapp.EspTouch.util.EspNetUtil;
 
 public class DatumCode implements ICodeData {
 	

@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.espressif.iot.esptouch.EsptouchResult;
-import com.espressif.iot.esptouch.IEsptouchListener;
-import com.espressif.iot.esptouch.IEsptouchResult;
-import com.espressif.iot.esptouch.protocol.EsptouchGenerator;
-import com.espressif.iot.esptouch.udp.UDPSocketClient;
-import com.espressif.iot.esptouch.udp.UDPSocketServer;
-import com.espressif.iot.esptouch.util.ByteUtil;
-import com.espressif.iot.esptouch.util.EspNetUtil;
+import br.com.andrey.projetointegradoapp.EspTouch.EsptouchResult;
+import br.com.andrey.projetointegradoapp.EspTouch.IEsptouchListener;
+import br.com.andrey.projetointegradoapp.EspTouch.IEsptouchResult;
+import br.com.andrey.projetointegradoapp.EspTouch.protocol.EsptouchGenerator;
+import br.com.andrey.projetointegradoapp.EspTouch.udp.UDPSocketClient;
+import br.com.andrey.projetointegradoapp.EspTouch.udp.UDPSocketServer;
+import br.com.andrey.projetointegradoapp.EspTouch.util.ByteUtil;
+import br.com.andrey.projetointegradoapp.EspTouch.util.EspNetUtil;
 
 import android.content.Context;
 import android.os.Looper;

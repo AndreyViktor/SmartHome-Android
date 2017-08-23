@@ -1,7 +1,7 @@
 package br.com.andrey.projetointegradoapp.EspTouch.protocol;
 
-import com.espressif.iot.esptouch.task.ICodeData;
-import com.espressif.iot.esptouch.util.ByteUtil;
+import br.com.andrey.projetointegradoapp.EspTouch.task.ICodeData;
+import br.com.andrey.projetointegradoapp.EspTouch.util.ByteUtil;
 
 public class GuideCode implements ICodeData {
 

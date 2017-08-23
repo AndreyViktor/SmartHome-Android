@@ -2,8 +2,8 @@ package br.com.andrey.projetointegradoapp.EspTouch.protocol;
 
 import java.net.InetAddress;
 
-import com.espressif.iot.esptouch.task.IEsptouchGenerator;
-import com.espressif.iot.esptouch.util.ByteUtil;
+import br.com.andrey.projetointegradoapp.EspTouch.task.IEsptouchGenerator;
+import br.com.andrey.projetointegradoapp.EspTouch.util.ByteUtil;
 
 public class EsptouchGenerator implements IEsptouchGenerator {
 

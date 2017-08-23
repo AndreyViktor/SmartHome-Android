@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import com.espressif.iot.esptouch.task.__IEsptouchTask;
+import br.com.andrey.projetointegradoapp.EspTouch.task.__IEsptouchTask;
 
 import android.util.Log;
 

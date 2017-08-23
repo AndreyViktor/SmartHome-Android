@@ -2,8 +2,8 @@ package br.com.andrey.projetointegradoapp.EspTouch.task;
 
 import java.util.List;
 
-import com.espressif.iot.esptouch.IEsptouchListener;
-import com.espressif.iot.esptouch.IEsptouchResult;
+import br.com.andrey.projetointegradoapp.EspTouch.IEsptouchListener;
+import br.com.andrey.projetointegradoapp.EspTouch.IEsptouchResult;
 
 /**
  * IEsptouchTask defined the task of esptouch should offer. INTERVAL here means

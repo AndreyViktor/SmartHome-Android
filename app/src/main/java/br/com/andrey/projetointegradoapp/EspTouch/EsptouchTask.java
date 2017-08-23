@@ -4,9 +4,9 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.espressif.iot.esptouch.task.EsptouchTaskParameter;
-import com.espressif.iot.esptouch.task.IEsptouchTaskParameter;
-import com.espressif.iot.esptouch.task.__EsptouchTask;
+import br.com.andrey.projetointegradoapp.EspTouch.task.EsptouchTaskParameter;
+import br.com.andrey.projetointegradoapp.EspTouch.task.IEsptouchTaskParameter;
+import br.com.andrey.projetointegradoapp.EspTouch.task.__EsptouchTask;
 
 public class EsptouchTask implements IEsptouchTask {
 
