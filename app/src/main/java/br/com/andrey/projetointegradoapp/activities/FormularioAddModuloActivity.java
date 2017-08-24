@@ -51,6 +51,7 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
         mTvApSsid = (TextView) findViewById(R.id.tvApSssidConnected);
         mEdtApPassword = (EditText) findViewById(R.id.edtApPassword);
         mSwitchIsSsidHidden = (Switch) findViewById(R.id.switchIsSsidHidden);
+        initSpinner();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
