@@ -14,7 +14,7 @@ import br.com.andrey.projetointegradoapp.R;
  */
 public class ViewHolder {
 
-    public TextView campoIp;
+    public TextView campoStatus;
     public TextView campoNome;
     public SeekBar campoBarra;
     public Switch campoSwitch1;
@@ -24,7 +24,7 @@ public class ViewHolder {
 
     public ViewHolder(View view) {
         campoNome =(TextView)view.findViewById(R.id.list_item_nome);
-        campoIp =(TextView) view.findViewById(R.id.list_item_IpAdress);
+        campoStatus =(TextView) view.findViewById(R.id.list_item_mqtt_status);
 
         campoBarra = (SeekBar)view.findViewById(R.id.list_item_seekbar);
         campoSwitch1 = (Switch)view.findViewById(R.id.list_item_switch_1);

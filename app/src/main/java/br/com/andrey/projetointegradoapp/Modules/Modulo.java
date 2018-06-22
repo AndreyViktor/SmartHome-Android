@@ -11,6 +11,16 @@ public class Modulo implements Serializable {
     private String ModuleIpAdress;
     private String modulo;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
+
     public String getModulo() {
         return modulo;
     }

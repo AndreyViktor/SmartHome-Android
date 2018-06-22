@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
@@ -86,11 +87,11 @@ public class ModuloAdapter extends BaseAdapter {
 
         }
         holder.campoNome.setTag(modulo.getId());
-        holder.campoIp.setTag(modulo.getId());
+        holder.campoStatus.setTag(modulo.getStatus());
 
 
         holder.campoNome.setText(modulo.getNome());
-        holder.campoIp.setText("ip adress:"+modulo.getModuleIpAdress());
+        //holder.campoIp.setText("ip adress:"+modulo.getModuleIpAdress());
 
         startMqtt();
 
@@ -233,12 +234,13 @@ public class ModuloAdapter extends BaseAdapter {
         mqttHelper.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {
-
+                //avisa na tela inicial que o app esta conectado ao mqtt
+                Toast.makeText(context, "conectado:"+s+b, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void connectionLost(Throwable throwable) {
-
+                Toast.makeText(context, "conexão perdida com servidor", Toast.LENGTH_SHORT).show();
             }
 
             @Override
