@@ -10,28 +10,56 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Controle luz branca"/>
 
     <br.com.andrey.projetointegradoapp.ColorPicker.AlphaView
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="50dp"
-        android:id="@+id/alpha_view"/>
+        android:id="@+id/alpha_view"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="choose a color"/>
+        android:text="choose a color"
+        android:layout_gravity="center"/>
 
     <br.com.andrey.projetointegradoapp.ColorPicker.HueSatView
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="150dp"
-        android:id="@+id/hue_sat"/>
+        android:id="@+id/hue_sat"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Controle intensidade luz"/>
+        android:text="Controle intensidade da luz colorida"
+        android:layout_gravity="center"/>
 
     <br.com.andrey.projetointegradoapp.ColorPicker.ValueView
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="50dp"
-        android:id="@+id/value_view"/>
+        android:id="@+id/value_view"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="offline"
+        android:textColor="red"
+        android:id="@+id/mqtt_status"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Debug:"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="connecting to WiFi:..."
+        android:textColor="red"
+        android:id="@+id/debug_info"
+        android:layout_gravity="center"/>
 </LinearLayout>
