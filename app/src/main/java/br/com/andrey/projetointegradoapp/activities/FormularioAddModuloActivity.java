@@ -219,6 +219,7 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
     private class EsptouchAsyncTask3 extends AsyncTask<String, Void, List<IEsptouchResult>> {
 
         private ProgressDialog mProgressDialog;
+        private String IpHost="";
 
         private IEsptouchTask mEsptouchTask;
         // without the lock, if the user tap confirm and cancel quickly enough,
@@ -299,11 +300,13 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
                 if (firstResult.isSuc()) {
                     StringBuilder sb = new StringBuilder();
                     for (IEsptouchResult resultInList : result) {
+                        IpHost = resultInList.getInetAddress().getHostAddress();
                         sb.append("Esptouch success, bssid = "
                                 + resultInList.getBssid()
                                 + ",InetAddress = "
-                                + resultInList.getInetAddress()
-                                .getHostAddress() + "\n");
+                                + IpHost + "\n");
+                        EditText campoIP = (EditText) findViewById(R.id.formulario_IP);
+                        campoIP.setText(IpHost);
                         count++;
                         if (count >= maxDisplayCount) {
                             break;
@@ -317,26 +320,25 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
                 } else {
                     mProgressDialog.setMessage("Esptouch fail");
 
-                    //termina config esp --- começa config sistema // rodando para falha -- ajustar firmware esp...
-                    Modulo modulo = new Modulo();
-
-                    EditText campoNome= (EditText) findViewById(R.id.formulario_nome);
-                    EditText campoIP = (EditText) findViewById(R.id.formulario_IP);
-                    RadioGroup group =(RadioGroup) findViewById(R.id.formulario_group);
-                    RadioButton rb = (RadioButton) findViewById(group.getCheckedRadioButtonId());
-
-                    modulo.setNome(campoNome.getText().toString());
-                    modulo.setModuleIpAdress("ipTeste");
-                    modulo.setModulo(rb.getText().toString());
-
-                    ModuloDAO dao = new ModuloDAO(FormularioAddModuloActivity.this);
-                    dao.insere(modulo);
-                    dao.close();
-
-                    finish();
-
                 }
-            }//codigo original
+            }
+            //termina config esp --- começa config sistema // rodando para falha -- ajustar firmware esp...
+            Modulo modulo = new Modulo();
+
+            EditText campoNome= (EditText) findViewById(R.id.formulario_nome);
+            RadioGroup group =(RadioGroup) findViewById(R.id.formulario_group);
+            RadioButton rb = (RadioButton) findViewById(group.getCheckedRadioButtonId());
+
+            modulo.setNome(campoNome.getText().toString());
+            modulo.setModuleIpAdress(IpHost);
+            modulo.setModulo(rb.getText().toString());
+
+            ModuloDAO dao = new ModuloDAO(FormularioAddModuloActivity.this);
+            dao.insere(modulo);
+            dao.close();
+
+            finish();
+
         }
     }
 }

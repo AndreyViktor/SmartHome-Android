@@ -7,15 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
 import java.util.List;
 
 import br.com.andrey.projetointegradoapp.ChangeViewsMainList.EditDimmerListItem;
 import br.com.andrey.projetointegradoapp.ColorPicker.ObservableColor;
 import br.com.andrey.projetointegradoapp.ColorPicker.ValueView;
 import br.com.andrey.projetointegradoapp.DAO.ModuloDAO;
+import br.com.andrey.projetointegradoapp.MQTThelper.MQTThelper;
 import br.com.andrey.projetointegradoapp.R;
 import br.com.andrey.projetointegradoapp.ChangeViewsMainList.ViewHolder;
 import br.com.andrey.projetointegradoapp.network.UDP;
+
+import static android.R.attr.data;
 
 /**
  * Created by andrey on 04/08/2016.
@@ -24,6 +33,11 @@ public class ModuloAdapter extends BaseAdapter {
     private final List<Modulo> modulos;
     private final Context context;
     private ViewHolder holder;
+    ///
+    //////
+    MQTThelper mqttHelper;
+
+
  //   private Modulo modulo;
 
     public ModuloAdapter(Context context, List<Modulo> modulos) {
@@ -78,10 +92,86 @@ public class ModuloAdapter extends BaseAdapter {
         holder.campoNome.setText(modulo.getNome());
         holder.campoIp.setText("ip adress:"+modulo.getModuleIpAdress());
 
+        startMqtt();
+
         switch (modulo.getModulo()){
             case "Switch":
-                ModuloSwitch sw = (ModuloSwitch) modulo;
-//                holder.campoSwitch.setChecked(sw.isOn());
+                final ModuloSwitch sw = (ModuloSwitch) modulo;
+                holder.campoSwitch1.setChecked(sw.isOn());
+                holder.campoSwitch2.setChecked(sw.isOn());
+                holder.campoSwitch3.setChecked(sw.isOn());
+
+
+                holder.campoSwitch1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String message ="";
+
+                        if(sw.isOn()){
+                            message = "false";
+                            sw.setOn(false);
+                        }else{
+                            message = "true";
+                            sw.setOn(true);
+                        }
+                        try {
+                            mqttHelper.mqttAndroidClient.publish("barplug/relay1/", message.getBytes(),0,false);
+                        } catch (MqttException e) {
+                            e.printStackTrace();
+                        }
+                        ModuloDAO dao = new ModuloDAO(context);
+                        dao.updateSwitch(sw);
+                        dao.close();
+
+                    }
+                });
+                holder.campoSwitch2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String message ="";
+
+                        if(sw.isOn()){
+                            message = "false";
+                            sw.setOn(false);
+                        }else{
+                            message = "true";
+                            sw.setOn(true);
+                        }
+                        try {
+                            mqttHelper.mqttAndroidClient.publish("barplug/relay2/", message.getBytes(),0,false);
+                        } catch (MqttException e) {
+                            e.printStackTrace();
+
+                        }
+                        ModuloDAO dao = new ModuloDAO(context);
+                        dao.updateSwitch(sw);
+                        dao.close();
+
+                    }
+                });
+                holder.campoSwitch3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String message ="";
+
+                    if(sw.isOn()){
+                        message = "false";
+                        sw.setOn(false);
+                    }else{
+                        message = "true";
+                        sw.setOn(true);
+                    }
+                    try {
+                        mqttHelper.mqttAndroidClient.publish("barplug/relay3/", message.getBytes(),0,false);
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+                    ModuloDAO dao = new ModuloDAO(context);
+                    dao.updateSwitch(sw);
+                    dao.close();
+
+                }
+            });
                 break;
             case "RGB":
                     view = getViewRGB(view, modulo, context);
@@ -109,17 +199,21 @@ public class ModuloAdapter extends BaseAdapter {
             @Override
             public void onValueChanged(ObservableColor oc) {
                 rgb.setColor(oc.getColor());
-                //Toast.makeText(RgbConfigActivity.this,"id:"+rgb.getId()+"color:"+rgb.getColor(),Toast.LENGTH_SHORT).show();
 
-
-                int white = rgb.getLedWhite();
-                int red = rgb.getLedRed();
-                int green = rgb.getLedGreen();
+                int white = rgb.getLedWhite() ;
+                int red = rgb.getLedRed() ;
+                int green = rgb.getLedGreen() ;
                 int blue = rgb.getLedBlue();
 
-                String message ="W"+white+"R"+red+"G"+green+"B"+blue ;
-                Thread t = new Thread(new UDP(message, rgb.getModuleIpAdress()));
-                t.start();
+                //String message ="W"+white+"R"+red+"G"+green+"B"+blue ;
+                try {
+                    mqttHelper.mqttAndroidClient.publish("lampadargb/white/", (white+"").getBytes(),0,false);
+                    mqttHelper.mqttAndroidClient.publish("lampadargb/red/", (red+"").getBytes(),0,false);
+                    mqttHelper.mqttAndroidClient.publish("lampadargb/green/", (green+"").getBytes(),0,false);
+                    mqttHelper.mqttAndroidClient.publish("lampadargb/blue/", (blue+"").getBytes(),0,false);
+                } catch (MqttException e) {
+                    e.printStackTrace();
+                }
 
                 Log.d("branco:",white+"");
                 Log.d("red:",red+"");
@@ -134,5 +228,29 @@ public class ModuloAdapter extends BaseAdapter {
         return view;
     }
 
+    private void startMqtt(){
+        mqttHelper = new MQTThelper(context);
+        mqttHelper.setCallback(new MqttCallbackExtended() {
+            @Override
+            public void connectComplete(boolean b, String s) {
 
+            }
+
+            @Override
+            public void connectionLost(Throwable throwable) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+                Log.w("Debug",mqttMessage.toString());
+
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+
+            }
+        });
+    }
 }

@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 public class ValueView extends SliderViewBase implements ColorObserver {
-    ////////////////////////////////////
     public interface OnValueChangeListener{
         void onValueChanged(ObservableColor observableColor);
     }

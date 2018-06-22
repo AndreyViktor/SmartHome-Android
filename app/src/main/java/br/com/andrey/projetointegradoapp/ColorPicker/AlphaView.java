@@ -14,8 +14,6 @@ public class AlphaView extends SliderViewBase implements ColorObserver {
     public void setOnAlphaChangeListener(AlphaView.OnAlphaChangeListener l){
         mOnAlphaChangeListener = l;
     }
-/////////////////////////
-
     private ObservableColor observableColor = new ObservableColor(0);
 
     public AlphaView(Context context) {

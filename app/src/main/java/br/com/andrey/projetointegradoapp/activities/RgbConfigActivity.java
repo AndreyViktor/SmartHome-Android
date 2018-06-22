@@ -10,11 +10,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import br.com.andrey.projetointegradoapp.ColorPicker.AlphaView;
 import br.com.andrey.projetointegradoapp.ColorPicker.HueSatView;
 import br.com.andrey.projetointegradoapp.ColorPicker.ObservableColor;
 import br.com.andrey.projetointegradoapp.ColorPicker.ValueView;
 import br.com.andrey.projetointegradoapp.DAO.ModuloDAO;
+import br.com.andrey.projetointegradoapp.MQTThelper.MQTThelper;
 import br.com.andrey.projetointegradoapp.Modules.ModuloLedRGB;
 import br.com.andrey.projetointegradoapp.R;
 import br.com.andrey.projetointegradoapp.ColorPicker.SwatchView;
@@ -27,6 +30,7 @@ public class RgbConfigActivity extends AppCompatActivity{
 
     private ObservableColor observableColor;
     private ModuloLedRGB rgb;
+    MQTThelper mqttHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +97,19 @@ public class RgbConfigActivity extends AppCompatActivity{
         int green = rgb.getLedGreen();
         int blue = rgb.getLedBlue();
 
+        try {
+            mqttHelper.mqttAndroidClient.publish("lampadargb/white/", (white+"").getBytes(),0,false);
+            mqttHelper.mqttAndroidClient.publish("lampadargb/red/", (red+"").getBytes(),0,false);
+            mqttHelper.mqttAndroidClient.publish("lampadargb/green/", (green+"").getBytes(),0,false);
+            mqttHelper.mqttAndroidClient.publish("lampadargb/blue/", (blue+"").getBytes(),0,false);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
+        /*
         String message ="W"+white+"R"+red+"G"+green+"B"+blue ;
         Thread t = new Thread(new UDP(message, rgb.getModuleIpAdress()));
-        t.start();
+        t.start();*/
 
         Log.d("branco:",white+"");
         Log.d("red:",red+"");

@@ -31,4 +31,5 @@ public interface IEsptouchResult {
 	 * @return the ip device of the device
 	 */
 	InetAddress getInetAddress();
+
 }

@@ -40,15 +40,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IP adress "
+        android:text="preencha as credenciais da rede WiFi"
         android:textSize="25dp"
         android:layout_gravity="center"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:id="@+id/formulario_IP"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,11 +53,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp"
-        android:id="@+id/edtApPassword"/>
+        android:id="@+id/edtApPassword"
+        android:text="WiFi password here"/>
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/switchIsSsidHidden"/>
+        android:id="@+id/switchIsSsidHidden"
+        android:text="is SSID hidden"/>
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
