@@ -19,6 +19,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MQTThelper {
 
+    private static MQTThelper sMQTThelper;
     public MqttAndroidClient mqttAndroidClient;
 
     final String serverUri = "tcp://m13.cloudmqtt.com:19525";
@@ -112,5 +113,11 @@ public class MQTThelper {
             System.err.println("Exceptionst subscribing");
             ex.printStackTrace();
         }
+    }
+    public static MQTThelper getInstance(Context context) {
+        if (sMQTThelper == null){
+            sMQTThelper = new MQTThelper(context);
+        }
+        return sMQTThelper;
     }
 }

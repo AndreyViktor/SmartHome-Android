@@ -230,7 +230,7 @@ public class ModuloAdapter extends BaseAdapter {
     }
 
     private void startMqtt(){
-        mqttHelper = new MQTThelper(context);
+        mqttHelper = MQTThelper.getInstance(context);
         mqttHelper.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {

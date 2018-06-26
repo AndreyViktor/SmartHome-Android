@@ -305,8 +305,8 @@ public class FormularioAddModuloActivity extends AppCompatActivity {
                                 + resultInList.getBssid()
                                 + ",InetAddress = "
                                 + IpHost + "\n");
-                        EditText campoIP = (EditText) findViewById(R.id.formulario_IP);
-                        campoIP.setText(IpHost);
+                        //EditText campoIP = (EditText) findViewById(R.id.formulario_IP);
+                        //campoIP.setText(IpHost);
                         count++;
                         if (count >= maxDisplayCount) {
                             break;

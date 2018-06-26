@@ -1,13 +1,9 @@
 package br.com.andrey.projetointegradoapp.activities;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.widget.Toast;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -20,17 +16,12 @@ import br.com.andrey.projetointegradoapp.DAO.ModuloDAO;
 import br.com.andrey.projetointegradoapp.MQTThelper.MQTThelper;
 import br.com.andrey.projetointegradoapp.Modules.ModuloLedRGB;
 import br.com.andrey.projetointegradoapp.R;
-import br.com.andrey.projetointegradoapp.ColorPicker.SwatchView;
-import br.com.andrey.projetointegradoapp.network.UDP;
-
-import static android.os.Build.VERSION_CODES.M;
-import static java.security.AccessController.getContext;
 
 public class RgbConfigActivity extends AppCompatActivity{
 
     private ObservableColor observableColor;
     private ModuloLedRGB rgb;
-    MQTThelper mqttHelper;
+    MQTThelper mqttHelper = MQTThelper.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +32,8 @@ public class RgbConfigActivity extends AppCompatActivity{
         AlphaView alpha = (AlphaView) findViewById(R.id.alpha_view);
         ValueView value = (ValueView) findViewById(R.id.value_view);
 
-        Intent lista = getIntent();
-        rgb = (ModuloLedRGB) lista.getSerializableExtra("rgb");
+        Intent recebeModuloInfo = getIntent();
+        rgb = (ModuloLedRGB) recebeModuloInfo.getSerializableExtra("rgb");
 
         observableColor = new ObservableColor(rgb.getColor());
 
@@ -60,7 +51,7 @@ public class RgbConfigActivity extends AppCompatActivity{
             @Override
             public void onValueChanged(ObservableColor observableColor) {
                 rgb.setColor(observableColor.getColor());
-                sendUDP(rgb);
+                sendMessageToMqtt(rgb);
             }
         });
 
@@ -68,7 +59,7 @@ public class RgbConfigActivity extends AppCompatActivity{
             @Override
             public void onNewColorPicked(ObservableColor observableColor) {
                 rgb.setColor(observableColor.getColor());
-                sendUDP(rgb);
+                sendMessageToMqtt(rgb);
             }
         });
 
@@ -76,7 +67,7 @@ public class RgbConfigActivity extends AppCompatActivity{
             @Override
             public void onAlphaChanged(ObservableColor observableColor) {
                 rgb.setColor(observableColor.getColor());
-                sendUDP(rgb);
+                sendMessageToMqtt(rgb);
             }
         });
 
@@ -90,7 +81,7 @@ public class RgbConfigActivity extends AppCompatActivity{
         Log.d("test:",""+test);
         dao.close();
     }
-    private void sendUDP(ModuloLedRGB rgb){
+    private void sendMessageToMqtt(ModuloLedRGB rgb){
 
         int white = rgb.getLedWhite();
         int red = rgb.getLedRed();
@@ -98,10 +89,10 @@ public class RgbConfigActivity extends AppCompatActivity{
         int blue = rgb.getLedBlue();
 
         try {
-            mqttHelper.mqttAndroidClient.publish("lampadargb/white/", (white+"").getBytes(),0,false);
-            mqttHelper.mqttAndroidClient.publish("lampadargb/red/", (red+"").getBytes(),0,false);
-            mqttHelper.mqttAndroidClient.publish("lampadargb/green/", (green+"").getBytes(),0,false);
-            mqttHelper.mqttAndroidClient.publish("lampadargb/blue/", (blue+"").getBytes(),0,false);
+            mqttHelper.mqttAndroidClient.publish("lampadargb/white/", String.valueOf(white).getBytes(),0,false);
+            mqttHelper.mqttAndroidClient.publish("lampadargb/red/", String.valueOf(red).getBytes(),0,false);
+            mqttHelper.mqttAndroidClient.publish("lampadargb/green/", String.valueOf(green).getBytes(),0,false);
+            mqttHelper.mqttAndroidClient.publish("lampadargb/blue/", String.valueOf(blue).getBytes(),0,false);
         } catch (MqttException e) {
             e.printStackTrace();
         }
