@@ -1,8 +1,10 @@
-# SmartHomeProject
+# Stuff Box
 
-Módulos IOT(ESP8266) controlados por aplicação Android.
+Stuff Box é o local aonde voce pode ter acesso, configurar, monitorar e interagir com seus dispositivos IOT.
 
-A tela inicial do aplicativo é uma lista com todos os módulos adicionados até então e um botão para adicionar novos modulos ao sistema.
+Stuff box android é uma aplicação android para integração entre dispositivos IOT e um servidor MQTT oferecendo uma interface de interação com o usuario. Stuff box é desenhado para que seja possivel integrar qualquer dispositivo IOT a sua interface, para tal o aplicativo deve conhecer os topicos que determinada coisa escreve ou publica, bem como o endereço e credenciais para acesso do servidor MQTT.
+
+A tela inicial do aplicativo é uma lista com todos os dispositivos adicionados até então e um botão para adicionar novos módulos ao sistema.
 
 ![alt text](https://github.com/AndreyViktor/SmartHome-Android/blob/master/Lista%20de%20Modulos.jpeg)
 
